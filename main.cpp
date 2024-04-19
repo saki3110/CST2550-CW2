@@ -10,6 +10,11 @@
 #include "Rental.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::vector<Movie> movies = Movie::readMoviesFromCSV("movies.csv");
+
+    std::vector<Customer> customers;
+
+
+
     return 0;
 }

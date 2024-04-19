@@ -4,49 +4,55 @@
 
 #include "Customer.h"
 
+// Define a constructor for the Customer class
 Customer::Customer(int id, const std::string& name, const std::string& address, const std::string& phoneNumber, const std::string& email)
         : id(id), name(name), address(address), phoneNumber(phoneNumber), email(email), membershipStatus("Regular") {}
 
+// Define getter methods for the Customer class
 int Customer::getId() const {
-    return id;
+    return id; // Return the customer's ID
 }
 
 std::string Customer::getName() const {
-    return name;
+    return name; // Return the customer's name
 }
 
 std::string Customer::getAddress() const {
-    return address;
+    return address; // Return the customer's address
 }++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 std::string Customer::getPhoneNumber() const {
-    return phoneNumber;
+    return phoneNumber; // Return the customer's phone number
+}
 }
 
 std::string Customer::getEmail() const {
-    return email;
+    return email; // Return the customer's email
 }
 
 std::string Customer::getMembershipStatus() const {
-    return membershipStatus;
+    return membershipStatus; // Return the customer's membership status
 }
 
 oid Customer::updateMembershipStatus(const std::string& newStatus) {
-    membershipStatus = newStatus;
+    membershipStatus = newStatus; // Update the membership status
 }
 
+// Define a function to display all customers
 void displayAllCustomers(const std::vector<Customer>& customers) {
     std::cout << "Customers:\n\n";
     for (const auto& customer : customers) {
         std::cout << "ID: " << customer.getId() << "\nName: " << customer.getName() << "\nAddress: " << customer.getAddress()
                   << "\nPhone Number: " << customer.getPhoneNumber() << "\nEmail: " << customer.getEmail()
                   << "\nMembership Status: " << customer.getMembershipStatus() << "\n\n";
+                      // Print each customer's details
     }
 }
 
+// Define a function to display a customer with a specific ID
 void displayCustomerWithID(const std::vector<Customer>& customers, int id) {
     for (const auto& customer : customers) {
-        if (customer.getId() == id) {
+        if (customer.getId() == id) { // Print the customer's details if the ID matches
             std::cout << "ID: " << customer.getId() << "\nName: " << customer.getName() << "\nAddress: " << customer.getAddress()
                       << "\nPhone Number: " << customer.getPhoneNumber() << "\nEmail: " << customer.getEmail()
                       << "\nMembership Status: " << customer.getMembershipStatus() << "\n\n";
@@ -57,19 +63,22 @@ void displayCustomerWithID(const std::vector<Customer>& customers, int id) {
     }
 }
 
+// Define a function to display a customer with a specific name
 void displayCustomerWithName(const std::vector<Customer>& customers, const std::string& name) {
     for (const auto& customer : customers) {
-        if (customer.getName() == name) {
+        if (customer.getName() == name) { // Print the customer's details if the name matches
             std::cout << "ID: " << customer.getId() << "\nName: " << customer.getName() << "\nAddress: " << customer.getAddress()
                       << "\nPhone Number: " << customer.getPhoneNumber() << "\nEmail: " << customer.getEmail()
                       << "\nMembership Status: " << customer.getMembershipStatus() << "\n\n";
         }
     }
+    // Print a message if no customer was found with the given name
     if (std::find_if(customers.begin(), customers.end(), [name](const Customer& customer) { return customer.getName() == name; }) == customers.end()) {
         std::cout << "No customer found with this name.\n";
     }
 }
 
+// Define a function to add a new customer
 void addNewCustomer(std::vector<Customer>& customers) {
     int id = customers.size() + 1;
     std::string name, address, phoneNumber, email;

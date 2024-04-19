@@ -7,6 +7,9 @@
 #include <vector>
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <ctime>
+#include <unordered_set>
 
 class Movie {
 private:
@@ -28,10 +31,11 @@ public:
     bool isAvailable() const;
     void setAvailability(bool available);
 };
-    void displayMovies(const std::vector<Movie>& movies);
-    void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& genre);
-    void displayAllGenres(const std::vector<Movie>& movies);
-    void displayMoviesWithID(const std::vector<Movie>& movies, int id);
-    void displayMoviesWithPriceSort(const std::vector<Movie>& movies);
-    
+
+void displayMovies(const std::vector<Movie>& movies);
+void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& genre);
+void displayAllGenres(const std::vector<Movie>& movies);
+void displayMoviesWithID(const std::vector<Movie>& movies, int id);
+void displayMoviesWithPriceSort(const std::vector<Movie>& movies);
+
 #endif

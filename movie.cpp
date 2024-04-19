@@ -96,3 +96,57 @@ std::vector<Movie> Movie::readMoviesFromCSV(const std::string& filename) {
     file.close();
     return movies;
 }
+
+// Function to display movies from a given array of movies
+void displayMovies(const std::vector<Movie>& movies) {
+    std::cout << "Movies:\n";
+
+    // Loop through the array
+    for (const auto& movie : movies) {
+
+        // Print the movie neatly with formatting to seperate movies appropriately
+        std::cout << "ID: " << movie.getId() << "\nTitle: " << movie.getTitle() << "\nGenre: " << movie.getGenre()
+                  << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee()
+                  << "\nAvailability: " << (movie.isAvailable() ? "Available" : "Not Available") 
+                  << "\n-----------------------------------\n";
+    }
+}
+
+// Function to display movies by genre, using a given array of movies and a given genre
+void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& genre) {
+    std::cout << "Movies in " << genre << " genre:\n";
+
+    // Loop through the movies and identify the movies with the given genre
+    for (const auto& movie : movies) {
+        if (movie.getGenre() == genre) {
+
+            // Print the movie neatly with formatting to seperate movies appropriately
+            std::cout << "ID: " << movie.getId() << "\nTitle: " << movie.getTitle() << "\nGenre: " << movie.getGenre()
+                  << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee()
+                  << "\nAvailability: " << (movie.isAvailable() ? "Available" : "Not Available") 
+                  << "\n--------------------------------n";
+        }
+    }
+    // Check the movies array and make use of a Lambda function to ensure that the given genre exits
+    if (std::find_if(movies.begin(), movies.end(), [genre](const Movie& movie) { return movie.getGenre() == genre; }) == movies.end()) {
+        std::cout << "No movies found in this genre.\n";
+    }
+}
+
+// Function to display all of the movie genres available
+void displayAllGenres(const std::vector<Movie>& movies) {
+
+    // Make use of a set to make sure all genres are unique
+    std::unordered_set<std::string> uniqueGenres;
+
+    // Loop through all the movies and add their genres to the set
+    for (const auto& movie : movies) {
+        uniqueGenres.insert(movie.getGenre());
+    }
+
+    // Print out all the genres by looping through them
+    std::cout << "Available Genres:\n";
+    for (const auto& genre : uniqueGenres) {
+        std::cout << "- " << genre << '\n';
+    }
+}

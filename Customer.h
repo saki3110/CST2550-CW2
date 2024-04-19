@@ -12,4 +12,13 @@
 #include <ctime>
 #include <unordered_set>
 
+class Customer {
+private:
+    int id;
+
+public:
+    int getId() const;
+
+};
+
 #endif //CST2550_CW2_CUSTOMER_H

@@ -37,5 +37,6 @@ void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& g
 void displayAllGenres(const std::vector<Movie>& movies);
 void displayMoviesWithID(const std::vector<Movie>& movies, int id);
 void displayMoviesWithPriceSort(const std::vector<Movie>& movies);
+int binarySearch(const std::vector<Movie>& movies, int id, int low, int high);
 
 #endif

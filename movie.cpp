@@ -150,3 +150,68 @@ void displayAllGenres(const std::vector<Movie>& movies) {
         std::cout << "- " << genre << '\n';
     }
 }
+
+// Binary Search function to get a movie using a given ID and sorted array of movies
+int binarySearch(const std::vector<Movie>& movies, int id, int low, int high) {
+
+    // In the case that the list is exhausted, the ID is not found. Return -1 for interpretation.
+    if (low > high) {
+        return -1;
+    }
+
+    // Calculate the middle index
+    int mid = low + (high - low) / 2; 
+
+    // Check if the middle movie's ID matches the given ID
+    if (movies[mid].getId() == id) {
+        return mid;                                         // ID found at the middle index
+    }
+    else if (movies[mid].getId() < id) {
+        return binarySearch(movies, id, mid + 1, high);     // Search in the right half of the array
+    }
+    else {
+        return binarySearch(movies, id, low, mid - 1);      // Search in the left half of the array
+    }
+}
+
+// Function to display a movie with a given ID
+void displayMoviesWithID(const std::vector<Movie>& movies, int id){
+
+    // Get the index of the requested movie using binary search
+    int movieIndex = binarySearch(movies, id, 0, movies.size() - 1);
+
+    // Display the movie if its ID was found
+    if (movieIndex != -1) {
+        // Get the required movie from the array
+        const Movie& movie = movies[movieIndex];
+
+        // Print the details
+        std::cout << "\nID: " << movie.getId() << "\nTitle: " << movie.getTitle() << "\nGenre: " << movie.getGenre()
+                  << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee();
+    }
+
+    // Print an error if no movie was found with the given ID
+    else {
+        std::cout << "No movie found with this ID.\n";
+    }
+}
+
+// Function to display movies, sorted by price
+void displayMoviesWithPriceSort(const std::vector<Movie>& movies) {
+
+    // Sorted movies vector array for display
+    std::vector<Movie> sortedMovies = movies;
+
+    // Sort the given movies vector array
+    std::sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
+        return a.getRentalFee() < b.getRentalFee();
+    });
+
+    // Print the sorted array by looping through it
+    std::cout << "Movies sorted by price:\n";
+    for (const auto& movie : sortedMovies) {
+        std::cout << "\nID: " << movie.getId() << "\nTitle: " << movie.getTitle()
+                  << "\nRental Fee: $" << movie.getRentalFee() 
+                  << "\n-----------------------------------\n";
+    }
+}

@@ -85,5 +85,97 @@ void addNewCustomer(std::vector<Customer>& customers) {
     std::cout << "Enter customer email: ";
     std::cin >> email;
 
+    // Prompt for membership status
+    std::cout << "Select membership status:\n";
+    std::cout << "1. Regular\n";
+    std::cout << "2. Premium\n";
+    std::cout << "Enter option: ";
+    std::cin >> membershipOption;
+
+    std::string membershipStatus;
+    switch (membershipOption) {
+        case '1':
+            membershipStatus = "Regular";
+            break;
+        case '2':
+            membershipStatus = "Premium";
+            break;
+        default:
+            std::cerr << "Invalid option. Defaulting to Regular membership.\n";
+            membershipStatus = "Regular";
+            break;
+    }
+
+    customers.push_back(Customer(id, name, address, phoneNumber, email));
+    customers.back().updateMembershipStatus(membershipStatus);
+    std::cout << "Customer added successfully.\n";
 }
+
+void updateMembershipStatus(std::vector<Customer>& customers) {
+    int id;
+    char membershipOption;
+
+    std::cout << "Enter customer ID: ";
+    std::cin >> id;
+
+    auto it = std::find_if(customers.begin(), customers.end(), [id](const Customer& customer) { return customer.getId() == id; });
+    if (it != customers.end()) {
+        std::cout << "Select membership status:\n";
+        std::cout << "1. Regular\n";
+        std::cout << "2. Premium\n";
+        std::cout << "Enter option: ";
+        std::cin >> membershipOption;
+
+        std::string membershipStatus;
+        switch (membershipOption) {
+            case '1':
+                membershipStatus = "Regular";
+                break;
+            case '2':
+                membershipStatus = "Premium";
+                break;
+            default:
+                std::cerr << "Invalid option. Defaulting to Regular membership.\n";
+                membershipStatus = "Regular";
+                break;
+        }
+
+        it->updateMembershipStatus(membershipStatus);
+        std::cout << "Membership status updated successfully.\n";
+    } else {
+        std::cout << "No customer found with this ID.\n";
+    }
+}
+
+void displayAllRegularCustomers(const std::vector<Customer>& customers) {
+    std::cout << "Regular Customers:\n\n";
+    for (const auto& customer : customers) {
+        if (customer.getMembershipStatus() == "Regular") {
+            std::cout << "ID: " << customer.getId() << "\nName: " << customer.getName() << "\nAddress: " << customer.getAddress()
+                      << "\nPhone Number: " << customer.getPhoneNumber() << "\nEmail: " << customer.getEmail()
+                      << "\nMembership Status: " << customer.getMembershipStatus() << "\n\n";
+        }
+    }
+    if (std::find_if(customers.begin(), customers.end(), [](const Customer& customer) { return customer.getMembershipStatus() == "Regular"; }) == customers.end()) {
+        std::cout << "No regular customers found.\n";
+    }
+}
+
+void displayAllPremiumCustomers(const std::vector<Customer>& customers) {
+    std::cout << "Premium Customers:\n\n";
+    for (const auto& customer : customers) {
+        if (customer.getMembershipStatus() == "Premium") {
+            std::cout << "ID: " << customer.getId() << "\nName: " << customer.getName() << "\nAddress: " << customer.getAddress()
+                      << "\nPhone Number: " << customer.getPhoneNumber() << "\nEmail: " << customer.getEmail()
+                      << "\nMembership Status: " << customer.getMembershipStatus() << "\n\n";
+        }
+    }
+    if (std::find_if(customers.begin(), customers.end(), [](const Customer& customer) { return customer.getMembershipStatus() == "Premium"; }) == customers.end()) {
+        std::cout << "No premium customers found.\n";
+    }
+}
+
+
+
+
 

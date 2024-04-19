@@ -1,14 +1,12 @@
 #ifndef MOVIE_H
 #define MOVIE_H
+
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <ctime>
-#include <unordered_set>
 
 class Movie {
 private:

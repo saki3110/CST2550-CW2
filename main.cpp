@@ -109,6 +109,44 @@ int main() {
                         addNewCustomer(customers);
                         break;
                     }
+                    case '3': {
+                        int id;
+                        std::cout << "Enter customer ID: ";
+                        std::cin >> id;
+                        displayCustomerWithID(customers, id);
+                        break;
+                    }
+                    case '4': {
+                        std::string name;
+                        std::cout << "Enter customer name: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, name);
+                        displayCustomerWithName(customers, name);
+                        break;
+                    }
+                    case '5': {
+                        updateMembershipStatus(customers);
+                        break;
+                    }
+                    case '6': {
+                        displayAllRegularCustomers(customers);
+                        break;
+                    }
+                    case '7': {
+                        displayAllPremiumCustomers(customers);
+                        break;
+                    }
+                    case '8': {
+                        std::cout << "Exiting...\n";
+                        break;
+                    }
+                    default: {
+                        std::cout << "Invalid choice.\n";
+                        break;
+                    }
+                }
+                break;
+            }
 
 
 

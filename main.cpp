@@ -147,6 +147,84 @@ int main() {
                 }
                 break;
             }
+            case 3:{
+                char subChoice;
+                std::cout << "-----------------------------\n"
+                          << "1. Rent a movie\n"
+                          << "2. Show all rented movies\n"
+                          << "3. Check movie is rented or not\n"
+                          << "4. Check rented movies by customer ID\n"
+                          << "5. Exit\n"
+                          << "-----------------------------";
+                std::cout << "\nEnter your choice: ";
+                std::cin >> subChoice;
+
+                switch (subChoice) {
+                    case '1': {
+                        rentMovie(movies, customers, rentals);
+                        break;
+                    }
+                    case '2': {
+                        displayAllRentals(rentals, movies);
+                        break;
+                    }
+                    case '3': {
+                        int movieId;
+                        std::cout << "Enter movie ID: ";
+                        std::cin >> movieId;
+                        checkIfMovieIsRented(rentals, movieId);
+                        break;
+                    }
+                    case '4': {
+                        int customerId;
+                        std::cout << "Enter customer ID: ";
+                        std::cin >> customerId;
+                        checkRentedMoviesWithCustomerID(rentals, movies, customers, customerId);
+                        break;
+                    }
+                    case '5': {
+                        std::cout << "Exiting...\n";
+                        break;
+                    }
+                    default: {
+                        std::cout << "Invalid choice.\n";
+                        break;
+                    }
+                }
+            }
+            case 4: {
+                char subChoice;
+                std::cout << "-----------------------------\n"
+                          << "1. Return a movie\n"
+                          << "2. Check fine\n"
+                          << "3. Exit\n"
+                          << "-----------------------------";
+                std::cout << "\nEnter your choice: ";
+                std::cin >> subChoice;
+
+                switch (subChoice) {
+                    case '1': {
+                        int rentalId;
+                        std::cout << "Enter rental ID: ";
+                        std::cin >> rentalId;
+                        returnMovie(rentals, rentalId);
+                        break;
+                    }
+                    case '2': {
+                        checkFine(rentals);
+                        break;
+                    }
+                    case '3': {
+                        std::cout << "Exiting...\n";
+                        break;
+                    }
+                    default: {
+                        std::cout << "Invalid choice.\n";
+                        break;
+                    }
+                }
+            }
+
 
 
 

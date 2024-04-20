@@ -85,6 +85,30 @@ int main() {
                 }
                 break;
             }
+            case 2: {
+                char subChoice;
+                std::cout << "-----------------------------\n"
+                          << "1. Display all Customers\n"
+                          << "2. Add new customer\n"
+                          << "3. Search customer with ID\n"
+                          << "4. Search cutomer with name\n"
+                          << "5. Update Membership status\n"
+                          << "6. Display all regular members\n"
+                          << "7. Display all premium members\n"
+                          << "8. Exit\n"
+                          << "-----------------------------";
+                std::cout << "\nEnter your choice: ";
+                std::cin >> subChoice;
+
+                switch (subChoice) {
+                    case '1': {
+                        displayAllCustomers(customers);
+                        break;
+                    }
+                    case '2': {
+                        addNewCustomer(customers);
+                        break;
+                    }
 
 
 

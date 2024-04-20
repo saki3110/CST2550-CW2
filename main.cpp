@@ -224,12 +224,16 @@ int main() {
                     }
                 }
             }
-
-
-
-
-
-
+            case 5:{
+                std::cout << "\nExiting...\n";
+                break;
+            }
+            default: {
+                std::cout << "Invalid choice. Please enter a number from 1 to 4.\n";
+                break;
+            }
+        }
+    } while (choice != 4);
 
     return 0;
 }

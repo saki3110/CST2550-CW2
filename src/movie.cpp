@@ -12,6 +12,7 @@ Movie::Movie(int id, const std::string& title, const std::string& genre, int rel
 
 // Getter for ID
 int Movie::getId() const {
+    return id;
 }
 
 // Getter for title
@@ -124,12 +125,12 @@ void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& g
             std::cout << "ID: " << movie.getId() << "\nTitle: " << movie.getTitle() << "\nGenre: " << movie.getGenre()
                   << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee()
                   << "\nAvailability: " << (movie.isAvailable() ? "Available" : "Not Available") 
-                  << "\n--------------------------------n";
+                  << "\n--------------------------------\n";
         }
     }
     // Check the movies array and make use of a Lambda function to ensure that the given genre exits
     if (std::find_if(movies.begin(), movies.end(), [genre](const Movie& movie) { return movie.getGenre() == genre; }) == movies.end()) {
-        std::cout << "No movies found in the genre --> " << genre << "\n";
+        std::cout << "No movies found in this genre.\n";
     }
 }
 
@@ -192,26 +193,7 @@ void displayMoviesWithID(const std::vector<Movie>& movies, int id){
 
     // Print an error if no movie was found with the given ID
     else {
-        std::cout << "No movie found with the ID --> " << std::to_string(id) << "\n";
-    }
-}
-
-// Function to display a movie with a given name
-void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap, const std::string& movieName) {
-
-    // Iterate through the movie map and see if it finds the movie with the given name
-    auto it = movieMap.find(movieName);
-    if (it != movieMap.end()) {
-
-        // Get the movie 
-        const Movie& movie = it->second;
-
-        // Print the details
-        std::cout << "\nID: " << movie.getId() << "\nTitle: " << movie.getTitle() << "\nGenre: " << movie.getGenre()
-                  << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee();
-    }
-    else {
-        std::cout << "No movie found with the name --> " << name << "\n";
+        std::cout << "No movie found with this ID.\n";
     }
 }
 

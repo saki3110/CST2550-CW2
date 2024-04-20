@@ -1,37 +1,37 @@
-#     makefile
-#     Author: Dristi Bhugun <db1178@live.mdx.ac.uk>
-#     Created: 08/01/24
-#     Updated: 08/01/24
+# Compiler and compiler flags
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Iinclude
 
-# Define compiler
-CC=g++
+# Define the source, object, and binary directories
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
 
-# Define flags
-CFLAGS=-Wall
-
-#Final executable name
-OUTPUT=video_rental
-
-# Source files
-SOURCES=main.cpp customer.cpp movie.cpp rental.cpp
-
-# Define your object files
-OBJECTS=$(SOURCES:.cpp=.o)
+# Define the source files, object files, and the target executable
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS = $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+TARGET = $(BINDIR)/VideoRentalSystem
 
 # Default target
-all: $(OUTPUT)
+all: $(TARGET)
 
-# Linking the final executable
-$(OUTPUT): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(OUTPUT) $(OBJECTS)
+# Link the target executable
+$(TARGET): $(OBJECTS)
+	@if not exist "$(BINDIR)" mkdir $(BINDIR)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+	@echo "Compilation successful. Run the program using .\\$(TARGET)"
 
-# Compiling source files into object files
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $<
+# Compile the source files into object files
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@if not exist "$(OBJDIR)" mkdir $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean target for cleaning up
+# Clean target for removing compiled files
 clean:
-	del /F /Q $(subst /,\,$(OUTPUT)) $(subst /,\,$(OBJECTS))
+	@echo "Cleaning up..."
+	@if exist "$(OBJDIR)" rmdir /s /q "$(OBJDIR)"
+	@if exist "$(BINDIR)" rmdir /s /q "$(BINDIR)"
+	@echo "Clean complete."
 
 # Phony targets
 .PHONY: all clean

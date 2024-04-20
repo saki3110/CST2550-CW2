@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <ctime>
 #include <unordered_set>
-#include <unordered_map>
 
 class Movie {
 private:
@@ -37,7 +36,6 @@ void displayMovies(const std::vector<Movie>& movies);
 void displayMoviesByGenre(const std::vector<Movie>& movies, const std::string& genre);
 void displayAllGenres(const std::vector<Movie>& movies);
 void displayMoviesWithID(const std::vector<Movie>& movies, int id);
-void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap, const std::string& movieName);
 void displayMoviesWithPriceSort(const std::vector<Movie>& movies);
 int binarySearch(const std::vector<Movie>& movies, int id, int low, int high);
 

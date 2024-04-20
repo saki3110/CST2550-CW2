@@ -1,4 +1,3 @@
-// Include necessary header files
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -10,25 +9,24 @@
 #include "Customer.h"
 #include "Rental.h"
 
-
 //function to check fine for customer ID
 void checkFine(std::vector<Rental>& rentals) {
     int customerId;
     std::cout << "Enter customer ID: ";
     std::cin >> customerId;
 
-    double totalFine = 0; // Initialize total fine amount
+    double totalFine = 0;
     for (const Rental& rental : rentals) {
-        if (rental.getCustomerId() == customerId) { // Check if rental belongs to the specified customer
-            std::time_t returnDate = rental.getReturnDate(); // Get return date of the rental
-            if (returnDate == 0) { // If the movie is not yet returned
-                std::time_t dueDate = rental.getDueDate(); // Get due date of the rental
-                std::time_t currentDate = std::time(0); // Get due date of the rental
+        if (rental.getCustomerId() == customerId) {
+            std::time_t returnDate = rental.getReturnDate();
+            if (returnDate == 0) {
+                std::time_t dueDate = rental.getDueDate();
+                std::time_t currentDate = std::time(0);
                 double fine = 0;
-                if (currentDate > dueDate) { // Calculate fine if due date is exceeded
-                    fine = (currentDate - dueDate) / (24 * 60 * 60) * 0.5; // Fine rate: $0.50 per day
+                if (currentDate > dueDate) {
+                    fine = (currentDate - dueDate) / (24 * 60 * 60) * 0.5;
                 }
-                totalFine += fine; // Accumulate fine for the customer
+                totalFine += fine;
             }
         }
     }
@@ -36,10 +34,10 @@ void checkFine(std::vector<Rental>& rentals) {
     std::cout << "Total fine for customer ID " << customerId << ": $" << totalFine << "\n";
 }
 
-// Function to check if a specific movie is rented
+//function to check if movie is rented or not
 void checkIfMovieIsRented(std::vector<Rental>& rentals, int movieId) {
     for (const Rental& rental : rentals) {
-        if (rental.getMovieId() == movieId) { // Check if rental matches the specified movie ID
+        if (rental.getMovieId() == movieId) {
             std::cout << "Movie is rented.\n";
             return;
         }
@@ -47,27 +45,26 @@ void checkIfMovieIsRented(std::vector<Rental>& rentals, int movieId) {
     std::cout << "Movie is not rented.\n";
 }
 
-// Function to check rented movies associated with a specific customer ID
+//check rented movies with customer ID
 void checkRentedMoviesWithCustomerID(std::vector<Rental>& rentals, const std::vector<Movie>& movies, const std::vector<Customer>& customers, int customerId) {
     for (const Rental& rental : rentals) {
-        if (rental.getCustomerId() == customerId) {  // Check if rental belongs to the specified customer
+        if (rental.getCustomerId() == customerId) {
+            //find movie ID
             std::cout << "Movie ID: " << rental.getMovieId() << "\n";
-
-            auto customerIt = std::find_if(customers.begin(), customers.end(),
-                                           [&](const Customer& customer) { return customer.getId() == rental.getCustomerId(); });
+            //find customer name
+            auto customerIt = std::find_if(customers.begin(), customers.end(), 
+                [&](const Customer& customer) { return customer.getId() == rental.getCustomerId(); });
             if (customerIt != customers.end()) {
                 std::cout << "Customer Name: " << customerIt->getName() << "\n";
             }
-
-            // Find the corresponding movie by ID
-            auto movieIt = std::find_if(movies.begin(), movies.end(),
-                                        [&](const Movie& movie) { return movie.getId() == rental.getMovieId(); });
-
-            // If the movie is found
+            
+            // Find movie name by ID
+            auto movieIt = std::find_if(movies.begin(), movies.end(), 
+                [&](const Movie& movie) { return movie.getId() == rental.getMovieId(); });
+            
             if (movieIt != movies.end()) {
-                // Print the movie name
                 std::cout << "Movie Name: " << movieIt->getTitle() << "\n";
-                time_t rentalDate = rental.getRentalDate(); // Get the rental date
+                time_t rentalDate = rental.getRentalDate();
                 std::cout << "Rented Date: " << std::ctime(&rentalDate);
                 std::cout << "Rented Price: $" << movieIt->getRentalFee() << "\n\n";
             }
@@ -75,7 +72,7 @@ void checkRentedMoviesWithCustomerID(std::vector<Rental>& rentals, const std::ve
     }
 }
 
-
+//function to rent a movie
 void rentMovie(std::vector<Movie>& movies, std::vector<Customer>& customers, std::vector<Rental>& rentals) {
     int movieId, customerId;
     std::cout << "Enter movie ID: ";
@@ -113,14 +110,15 @@ void rentMovie(std::vector<Movie>& movies, std::vector<Customer>& customers, std
 
     // Get the current date
     std::time_t rentalDate = std::time(0);
-    std::time_t dueDate = rentalDate + 7 * 24 * 60 * 60; // Due date is 7 days from rental date
+    // Due date is 7 days from rental date
+    std::time_t dueDate = rentalDate + 7 * 24 * 60 * 60; 
 
     // Add the rental
     rentals.push_back(Rental(rentals.size() + 1, movieId, customerId, rentalDate, dueDate, movieIt->getRentalFee()));
     std::cout << "Movie rented successfully.\n";
 }
 
-// Display all rentals along with relevant information
+//function to display all rentals
 void displayAllRentals(const std::vector<Rental>& rentals, const std::vector<Movie>& movies) {
     std::cout << "\n------All Rentals------\n";
     if (rentals.empty()) {
@@ -132,14 +130,13 @@ void displayAllRentals(const std::vector<Rental>& rentals, const std::vector<Mov
             std::time_t dueDateToPrint = rental.getDueDate();
             std::time_t returnDateToPrint = rental.getReturnDate();
 
-            // Print rental details
             std::cout << "-----------------------------\n"
                       << "Rental ID: " << rental.getId() << "\n"
                       << "Customer ID: " << rental.getCustomerId() << "\n"
                       << "Rental Date: " << std::ctime(&rentalDateToPrint)
                       << "Due Date: " << std::ctime(&dueDateToPrint)
                       << "Return Date: " << (returnDateToPrint != 0 ? std::ctime(&returnDateToPrint) : "Not returned yet\n");
-
+            
             // Display movie name and price
             displayMoviesWithID(movies, rental.getMovieId());
             std::cout << "\n-----------------------------\n";
@@ -147,33 +144,16 @@ void displayAllRentals(const std::vector<Rental>& rentals, const std::vector<Mov
     }
 }
 
-void returnMovie(std::vector<Rental>& rentals, int rentalId) {
-    auto rentalIt = std::find_if(rentals.begin(), rentals.end(), [rentalId](const Rental& rental) {
-        return rental.getId() == rentalId;
-    });
 
-    if (rentalIt == rentals.end()) {
-        std::cout << "Rental not found.\n";
-        return;
-    }
 
-    // Get the current date
-    std::time_t returnDate = std::time(0);
 
-    // Update the return date
-    rentalIt->setReturnDate(returnDate);
 
-    // Remove the rental from the vector
-    rentals.erase(rentalIt);
-
-    std::cout << "Movie returned successfully.\n";
-}
-
-// Main function for the Movie Rental System
+//main function
 int main() {
     // Read movies from CSV file
     std::vector<Movie> movies = Movie::readMoviesFromCSV("movies.csv");
-
+    
+    // Customers vector
     std::vector<Customer> customers;
 
     //Sample customers
@@ -183,12 +163,14 @@ int main() {
     customers.push_back(Customer(4, "Jason", "987 Pine St", "456-789-0123","jason7@gmail.com"));
     customers.push_back(Customer(5, "Yashvin", "654 Birch St", "567-890-1234","yash673@gmail.com"));
 
-    std::vector<Rental> rentals;
+    // Rentals vector
+    std::vector<Rental> rentals; 
+
     //Sample Rentals
     rentals.push_back(Rental(1, 1, 1, std::time(0), std::time(0), 2.99));
     rentals.push_back(Rental(2, 2, 2, std::time(0), std::time(0), 3.99));
 
-
+    //Menu area
     int choice;
     do {
         std::cout << "\n------Movie Rental System------\n";
@@ -219,8 +201,7 @@ int main() {
                         displayMovies(movies);
                         break;
                     }
-                        // Add other subchoices here
-                    case '2': { // Add other menu options and their functionality here
+                    case '2': {
                         displayAllGenres(movies);
                         std::string genre;
                         std::cout << "Enter genre: ";
@@ -355,7 +336,7 @@ int main() {
                         std::cout << "Invalid choice.\n";
                         break;
                     }
-                }
+            }
             }
             case 4: {
                 char subChoice;
@@ -389,16 +370,17 @@ int main() {
                     }
                 }
             }
-            case 5:{
-                std::cout << "\nExiting...\n";
+            case 5: {
+                std::cout << "Exiting...\n";
                 break;
             }
             default: {
-                std::cout << "Invalid choice. Please enter a number from 1 to 4.\n";
+                std::cout << "Invalid choice. Please enter a number from 1 to 6.\n";
                 break;
             }
         }
-    } while (choice != 4);
+    } while (choice != 5);
 
     return 0;
 }
+

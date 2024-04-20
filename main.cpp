@@ -63,9 +63,11 @@ void checkRentedMoviesWithCustomerID(std::vector<Rental>& rentals, const std::ve
             auto movieIt = std::find_if(movies.begin(), movies.end(),
                                         [&](const Movie& movie) { return movie.getId() == rental.getMovieId(); });
 
+            // If the movie is found
             if (movieIt != movies.end()) {
+                // Print the movie name
                 std::cout << "Movie Name: " << movieIt->getTitle() << "\n";
-                time_t rentalDate = rental.getRentalDate();
+                time_t rentalDate = rental.getRentalDate(); // Get the rental date
                 std::cout << "Rented Date: " << std::ctime(&rentalDate);
                 std::cout << "Rented Price: $" << movieIt->getRentalFee() << "\n\n";
             }
@@ -118,6 +120,7 @@ void rentMovie(std::vector<Movie>& movies, std::vector<Customer>& customers, std
     std::cout << "Movie rented successfully.\n";
 }
 
+// Display all rentals along with relevant information
 void displayAllRentals(const std::vector<Rental>& rentals, const std::vector<Movie>& movies) {
     std::cout << "\n------All Rentals------\n";
     if (rentals.empty()) {
@@ -129,6 +132,7 @@ void displayAllRentals(const std::vector<Rental>& rentals, const std::vector<Mov
             std::time_t dueDateToPrint = rental.getDueDate();
             std::time_t returnDateToPrint = rental.getReturnDate();
 
+            // Print rental details
             std::cout << "-----------------------------\n"
                       << "Rental ID: " << rental.getId() << "\n"
                       << "Customer ID: " << rental.getCustomerId() << "\n"
@@ -165,10 +169,9 @@ void returnMovie(std::vector<Rental>& rentals, int rentalId) {
     std::cout << "Movie returned successfully.\n";
 }
 
-
-
-
+// Main function for the Movie Rental System
 int main() {
+    // Read movies from CSV file
     std::vector<Movie> movies = Movie::readMoviesFromCSV("movies.csv");
 
     std::vector<Customer> customers;
@@ -216,7 +219,8 @@ int main() {
                         displayMovies(movies);
                         break;
                     }
-                    case '2': {
+                        // Add other subchoices here
+                    case '2': { // Add other menu options and their functionality here
                         displayAllGenres(movies);
                         std::string genre;
                         std::cout << "Enter genre: ";

@@ -166,7 +166,7 @@ int main() {
     //Sample customers
     customers.push_back(Customer(1, "Sakina", "123 Main St", "123-456-7890","sakina34@gmail.com"));
     customers.push_back(Customer(2, "Dristi Bhugun", "456 Elm St", "234-567-8901","dristi.db@gmail.com"));
-    customers.push_back(Customer(3, "Adolf Hitler", "789 Oak St", "345-678-9012","adolf78@gmail.com"));
+    customers.push_back(Customer(3, "Adolf Archi", "789 Oak St", "345-678-9012","adolf78@gmail.com"));
     customers.push_back(Customer(4, "Jason", "987 Pine St", "456-789-0123","jason7@gmail.com"));
     customers.push_back(Customer(5, "Yashvin", "654 Birch St", "567-890-1234","yash673@gmail.com"));
 
@@ -199,7 +199,7 @@ int main() {
                           << "3. Movies with Price sort\n"
                           << "4. Search movie with ID\n"
                           << "5. Search movie with movie name\n"
-                          << "5. Exit\n"
+                          << "6. Exit\n"
                           << "-----------------------------";
                 std::cout << "\nEnter your choice: ";
                 std::cin >> subChoice;
@@ -237,6 +237,7 @@ int main() {
                     }
                     case '6': {
                         std::cout << "Exiting...\n";
+                        break;
                     }
                     default: {
                         std::cout << "Invalid choice.\n";

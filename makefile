@@ -17,20 +17,20 @@ all: $(TARGET)
 
 # Link the target executable
 $(TARGET): $(OBJECTS)
-	@if not exist "$(BINDIR)" mkdir $(BINDIR)
+	mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 	@echo "Compilation successful. Run the program using .\\$(TARGET)"
 
 # Compile the source files into object files
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@if not exist "$(OBJDIR)" mkdir $(OBJDIR)
+	mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean target for removing compiled files
 clean:
 	@echo "Cleaning up..."
-	@if exist "$(OBJDIR)" rmdir /s /q "$(OBJDIR)"
-	@if exist "$(BINDIR)" rmdir /s /q "$(BINDIR)"
+	@rm -rf $(OBJDIR)
+	@rm -rf $(BINDIR)
 	@echo "Clean complete."
 
 # Phony targets

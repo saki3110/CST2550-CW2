@@ -163,7 +163,7 @@ int main() {
         std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
 
         // Insert the movie into the hash map using the lowercase movie name as the key
-        movieHashMap[lowercaseName] = movie;
+        movieHashMap.insert({ lowercaseName, movie });
     }
 
     // Customers vector

@@ -198,7 +198,7 @@ void displayMoviesWithID(const std::vector<Movie>& movies, int id){
 }
 
 // Function to display a movie with a given name
-void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap, const std::string& movieName) {
+void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap, std::string& movieName) {
 
     // Convert th movie name to lowercase for ease of use
     std::transform(movieName.begin(), movieName.end(), movieName.begin(), ::tolower);

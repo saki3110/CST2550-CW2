@@ -215,7 +215,7 @@ void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap
                   << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee();
     }
     else {
-        std::cout << "No movie found with the name --> " << moovieName << "\n";
+        std::cout << "No movie found with the name --> " << movieName << "\n";
     }
 }
 

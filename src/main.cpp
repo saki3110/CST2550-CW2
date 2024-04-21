@@ -157,7 +157,13 @@ int main() {
     // Generate the hash table using the movie array
     std::unordered_map<std::string, Movie> movieHashMap;
     for (const auto& movie : movies) {
-        movieHashMap[movie.name] = movie;
+
+        // Convert the movie name to lowercase
+        std::string lowercaseName = movie.name;
+        std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
+
+        // Insert the movie into the hash map using the lowercase movie name as the key
+        movieHashMap[lowercaseName] = movie;
     }
 
     // Customers vector

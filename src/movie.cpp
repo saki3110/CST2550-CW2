@@ -200,7 +200,10 @@ void displayMoviesWithID(const std::vector<Movie>& movies, int id){
 // Function to display a movie with a given name
 void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap, const std::string& movieName) {
 
-    // Iterate through the movie map and see if it finds the movie with the given name
+    // Convert th movie name to lowercase for ease of use
+    std::transform(movieName.begin(), movieName.end(), movieName.begin(), ::tolower);
+
+    // Find the movie with the given name in the hash map
     auto it = movieMap.find(movieName);
     if (it != movieMap.end()) {
 
@@ -212,7 +215,7 @@ void displayMovieWithName(const std::unordered_map<std::string, Movie>& movieMap
                   << "\nRelease Year: " << movie.getReleaseYear() << "\nRental Fee: $" << movie.getRentalFee();
     }
     else {
-        std::cout << "No movie found with the name --> " << name << "\n";
+        std::cout << "No movie found with the name --> " << moovieName << "\n";
     }
 }
 

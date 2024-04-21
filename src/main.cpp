@@ -159,7 +159,7 @@ int main() {
     for (const auto& movie : movies) {
 
         // Convert the movie name to lowercase
-        std::string lowercaseName = movie.name;
+        std::string lowercaseName = movie.getTitle();
         std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
 
         // Insert the movie into the hash map using the lowercase movie name as the key
@@ -237,7 +237,7 @@ int main() {
                     case '5': {
                         std::string givenMovieName;
                         std::cout << "Enter movie Name: ";
-                        std:cin >> givenMovieName;
+                        std::cin >> givenMovieName;
                         displayMovieWithName(movieHashMap, givenMovieName);
                         break;
                     }

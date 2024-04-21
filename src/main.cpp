@@ -5,6 +5,7 @@
 #include <ctime>
 #include <sstream>
 #include <unordered_set>
+#include <unordered_map>
 #include "Movie.h"
 #include "Customer.h"
 #include "Rental.h"
@@ -153,6 +154,12 @@ int main() {
     // Read movies from CSV file
     std::vector<Movie> movies = Movie::readMoviesFromCSV("movies.csv");
     
+    // Generate the hash table using the movie array
+    std::unordered_map<std::string, Movie> movieHashMap;
+    for (const auto& movie : movies) {
+        movieHashMap[movie.name] = movie;
+    }
+
     // Customers vector
     std::vector<Customer> customers;
 
@@ -191,6 +198,7 @@ int main() {
                           << "2. Movies by Genre\n"
                           << "3. Movies with Price sort\n"
                           << "4. Search movie with ID\n"
+                          << "5. Search movie with movie name\n"
                           << "5. Exit\n"
                           << "-----------------------------";
                 std::cout << "\nEnter your choice: ";
@@ -221,8 +229,14 @@ int main() {
                         break;
                     }
                     case '5': {
-                        std::cout << "Exiting...\n";
+                        std::string givenMovieName;
+                        std::cout << "Enter movie Name: ";
+                        std:cin >> givenMovieName;
+                        displayMovieWithName(movieHashMap, givenMovieName);
                         break;
+                    }
+                    case '6': {
+                        std::cout << "Exiting...\n";
                     }
                     default: {
                         std::cout << "Invalid choice.\n";
